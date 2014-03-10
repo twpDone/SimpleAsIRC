@@ -46,5 +46,6 @@ class Core:
         if re.match(regChan.lower(),data.lower())!=None:
             return Message(self.m_channel,pseudo,msg)
         if data.upper().__contains__("PING"):
-            s.sendall('PONG\r\n')
-
+            self.m_socket.sendall('PONG\r\n')
+    def quit(self):
+        self.m_socket.close();
