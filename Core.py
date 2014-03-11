@@ -58,7 +58,7 @@ class Core:
 
 class secureCore(Core):
     def __init__(self,channel="#dut.info",name="twp_bot",port=6697,host='irc.freenode.net'):
-        Core.__init__(self,channel="#dut.info",name="twp_bot",port=6697,host='irc.freenode.net')
+        Core.__init__(self,channel,name,port,host)
         self.m_socket=self.createSocket()
     def createSocket(self):
         return SSLSocket(socket.socket(socket.AF_INET, socket.SOCK_STREAM))
