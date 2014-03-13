@@ -29,6 +29,14 @@ class Control:
             if m!=None:
                 self.display.display(m)
                 self.check(m,self.actions)
+    def write(self):
+        while 1:
+            inp=self.display.getInput()
+            if inp=="quit":
+                break
+            else:
+                self.core.send2Chan(Message(self.core.m_channel,self.core.m_name,inp))
+
     
     def start(self):
         self.core.start()
@@ -36,15 +44,19 @@ class Control:
         tEcoute=threading.Thread(None, self.ecoute, None, (), {})
         tEcoute.start()
 
+        tWrite=threading.Thread(None, self.write, None, (), {})
+        tWrite.start()
+
         print("Control started")
         #should be in a separate method 
         while 1:
-            inp=self.display.getInput()
-            if inp=="quit":
+            if tEcoute.isAlive() and (not tWrite.isAlive()) :
                 break
-            else:
-                self.core.send2Chan(Message(self.core.m_channel,self.core.m_name,inp))
-        
+            if (not tEcoute.isAlive()) and tWrite.isAlive() :
+                #Nickname alredy taken
+                break
+
+        tWrite._Thread__stop()
         tEcoute._Thread__stop()
         self.core.quit()
 
