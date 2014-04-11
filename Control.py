@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-##
-# Controls for the application.
 
 from Core import *
 
@@ -12,7 +10,7 @@ import sys
 import time
 
 ##
-# @class Control
+# Controls for the application.
 # @Brief Controleur de l'application.
 # @brief Contain references to Core, Action and Display objects.
 # @see Core
