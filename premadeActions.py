@@ -5,6 +5,8 @@ from Action import Action
 from Message import Message
 
 import time
+import string
+import subprocess
 
 def boxAction(Core,message):
     Core.send2Chan(Message(Core.m_channel,Core.m_name,"booooooox !"))
@@ -55,8 +57,10 @@ def manAction(Core,message):
             if tabRes[line].__contains__("DESCRIPTION"):
                 break
             Core.send2Chan(Message(Core.m_channel,Core.m_name,tabRes[line]))
-    except:
+    except Exception as exp:
         Core.send2Chan(Message(Core.m_channel,Core.m_name,"Pas de man !"))
+    
+
 
 actionTab=[]
 actionTab.append(Action("!box",boxAction))
