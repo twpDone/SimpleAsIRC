@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 ##
-# @package SimpleAsIrc
+# @package SimpleAsIRC
 # @file Control.py
 # Controls for the application.
 
