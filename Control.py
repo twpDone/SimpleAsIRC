@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 ##
-# @package SimpleAsIRC
-# @file Control.py
 # Controls for the application.
 
 from Core import *
@@ -113,6 +111,7 @@ class Control:
 # Overload the Function of the Control class to implement a Bot behaviour.
 # @note the loadActions is overloaded to load the actions to be performed by the bot.
 class BotControl(Control):
+
     ##
     # Constructor
     # @note load Actions when the object is constructed
