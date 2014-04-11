@@ -4,8 +4,7 @@
 from Message import Message
 
 ##
-# @interface Display
-# Define how to interact with the user.
+# Interface to Define how to interact with the user.
 class Display:
 
     ##
