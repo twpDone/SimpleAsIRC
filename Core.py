@@ -15,7 +15,7 @@ import time
 from ssl import SSLSocket
 
 ##
-# Core of the application.
+# Core of the application, implement a part of the RFC 1459: Internet Relay Chat ProtocolA (Client side).
 class Core:
 
     ##
@@ -27,24 +27,24 @@ class Core:
     # @param host IRC Server host.
     def __init__(self,channel="#dut.info",name="twp_bot",port=6667,host='irc.freenode.net'):
 
-        ##
-        # @val m_channel Channel to connect.
+        ## @var m_channel
+        # Channel to connect.
         self.m_channel=channel
 
-        ##
-        # @val m_host IRC Server host.
+        ## @var m_host 
+        # IRC Server host.
         self.m_host=host
 
-        ##
-        # @val m_port Port to use.
+        ## @var m_port
+        # Port to use.
         self.m_port=port
 
-        ##
-        # @val m_name Nickname for the IRC user.
+        ## @var m_name
+        # Nickname for the IRC user.
         self.m_name=name
 
-        ##
-        # @val m_socket Socket to use for I/O.
+        ## @var m_socket
+        # Socket to use for I/O.
         self.m_socket=self.createSocket();
 
     ##
