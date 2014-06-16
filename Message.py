@@ -29,7 +29,7 @@ class Message:
     # Returns the destination of the message.
     # @return Destination of the message.
     def getDest(self):
-	dest=self.m_dest
+        dest=self.m_dest
         return dest;
 
     ##

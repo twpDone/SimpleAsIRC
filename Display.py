@@ -38,14 +38,14 @@ class ConsoleDisplay(Display):
     def getInput(self):
         try:
             # try to get raw input
-            inp=raw_input(": ")
+            inp=input(": ")
             return inp
         except:
-            print "\nI Can't read"
+            print("\nI Can't read")
     ##
     # Display a Message to the user
     # @param message Message
     def display(self,message):
         # affiche [destination] <source>: text of the Message 
-        print "["+message.getDest()+"] "+message.getName().replace(":","")+": "+message.getText() 
+        print("["+message.getDest()+"] "+message.getName().replace(":","")+": "+message.getText())
 

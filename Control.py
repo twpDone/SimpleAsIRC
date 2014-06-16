@@ -101,8 +101,8 @@ class Control:
             if not tEcoute.isAlive():
                 break
 
-        tWrite._Thread__stop() # stop write thread
-        tEcoute._Thread__stop() # stop ecoute (listen) thread
+        tWrite.__Thread__stop() # stop write thread
+        tEcoute.__Thread__stop() # stop ecoute (listen) thread
         self.core.quit() # quit the Core/ Ends irc protocol
 
 ##

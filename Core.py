@@ -59,10 +59,10 @@ class Core:
     # Start the IRC protocol.
     # @param self Self.
     def helloIRC(self):
-        self.m_socket.sendall('PASS irc\r\n') #send password
-        self.m_socket.sendall('NICK '+self.m_name+'\r\n') # define  nickname
-        self.m_socket.sendall('USER '+self.m_name+' 127.0.0.1 '+self.m_host+' '+self.m_name+'\r\n') # define user
-        self.m_socket.sendall('JOIN '+self.m_channel+'\r\n') # Join channel
+        self.m_socket.sendall(bytes('PASS irc\r\n','utf-8')) #send password
+        self.m_socket.sendall(bytes('NICK '+self.m_name+'\r\n','utf-8')) # define  nickname
+        self.m_socket.sendall(bytes('USER '+self.m_name+' 127.0.0.1 '+self.m_host+' '+self.m_name+'\r\n','utf-8')) # define user
+        self.m_socket.sendall(bytes('JOIN '+self.m_channel+'\r\n','utf-8')) # Join channel
 
     ##
     # Create a new TCP socket.
@@ -77,7 +77,7 @@ class Core:
     def send2Chan(self,Message):
         time.sleep(1) # wait 1 second, avoid the flood kick
         # Send the Message to a channel or destination user
-        self.m_socket.sendall("PRIVMSG "+Message.getDest()+" : "+Message.getText()+" \r\n") 
+        self.m_socket.sendall(bytes("PRIVMSG "+str(Message.getDest())+" : "+str(Message.getText())+" \r\n","utf-8")) 
 
     ##
     # Send a Message as an IRC Action to a channel or destination user.
@@ -86,7 +86,7 @@ class Core:
     def sendAction2Chan(self,Message):
         time.sleep(1) # wait 1 second, avoid the flood kick
          # Send the Message as an IRC Action to a channel or destination user.
-        self.m_socket.sendall("PRIVMSG "+Message.getDest()+" :"+chr(1)+"ACTION "+Message.getText()+chr(1)+" \r\n")
+        self.m_socket.sendall(bytes("PRIVMSG "+str(Message.getDest())+" :"+chr(1)+"ACTION "+str(Message.getText())+chr(1)+" \r\n","utf-8"))
 
     ##
     # Read from the m_socket, if the message dest is the joined chan or the current nickname.
@@ -96,7 +96,7 @@ class Core:
     # @param self Self.
     def read(self):
         try:
-            data = self.m_socket.recv(1024) # read from socket
+            data = str(self.m_socket.recv(1024)) # read from socket
             # delete \r and \n line's ending
             data=data.replace("\r","")
             data=data.replace("\n","")
@@ -115,8 +115,8 @@ class Core:
             # if "nickname already in use" warning
             if re.match(".*already in use.*".lower(),data.lower())!=None:
                 self.m_name+="_" # append an underscore to the current nickname
-                self.m_socket.sendall('NICK '+self.m_name+'\r\n') # define the new nickname
-                self.m_socket.sendall('JOIN '+self.m_channel+'\r\n') # join the channel with the new nickname
+                self.m_socket.sendall(bytes('NICK '+self.m_name+'\r\n',"utf-8")) # define the new nickname
+                self.m_socket.sendall(bytes('JOIN '+self.m_channel+'\r\n',"utf-8")) # join the channel with the new nickname
             
             #manque recuperation du destinataire
             regName = ".*(PRIVMSG|NOTICE) ("+self.m_name+"|\*) :.*" # define the regex wich must match
@@ -130,11 +130,11 @@ class Core:
             regChan = ".*PRIVMSG "+self.m_channel+" :.*"
             if re.match(regChan.lower(),data.lower())!=None:
                 # return a new Message object.
-                return Message(self.m_channel,pseudo,msg)
+                return Message(str(self.m_channel),str(pseudo),str(msg))
 
             # if the server sends a ping, ping back => send pong
             if data.upper().__contains__("PING"):
-                self.m_socket.sendall('PONG\r\n')
+                self.m_socket.sendall(bytes('PONG\r\n',"utf-8"))
 
         except Exception as ex:
             print("Erreur de reception")

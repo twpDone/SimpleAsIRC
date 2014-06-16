@@ -22,34 +22,34 @@ for index in range(0,len(sys.argv)):
     if sys.argv[index]=="-N":
         try:
             botname=sys.argv[index+1]
-            print "Je m'appelle : "+botname
+            print("Je m'appelle : "+botname)
         except Exception as e:
-            print "Erreur dans les arguments"
+            print("Erreur dans les arguments")
     if sys.argv[index]=="-C":
         try:
             chan=sys.argv[index+1]
-            print "Joining : "+chan
+            print("Joining : "+chan)
         except Exception as e:
-            print "Erreur dans les arguments"
+            print("Erreur dans les arguments")
     if sys.argv[index]=="-s":
-        print "IRC over SSL selected !"
+        print("IRC over SSL selected !")
         secure=True
 
 
 
 if secure==False:
     core=Core(channel=chan, name=botname, port=6667, host='irc.freenode.net')
-    print "SSL Disabled !!! Use -s for using SSL."
+    print("SSL Disabled !!! Use -s for using SSL.")
 else:
     core=secureCore(channel=chan, name=botname, port=6697, host='irc.freenode.net')
-    print "SSL enabled !"
+    print("SSL enabled !")
 
 display=ConsoleDisplay()
 
 if bot==False:
     control=Control(core,display)
 else:
-    print "Bot mode Activated !"
+    print("Bot mode Activated !")
     control=BotControl(core,display)
 
 control.start()
