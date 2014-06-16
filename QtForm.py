@@ -18,6 +18,7 @@ class Form(QDialog):
         self.textToSend=""
     def sendMessage(self):
         text=self.lineedit.text()
+        self.lineedit.clear()
         self.browser.append(str(text))
         self.textToSend=str(text)
     def display(self,message):
