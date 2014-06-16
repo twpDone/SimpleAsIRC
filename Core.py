@@ -96,7 +96,7 @@ class Core:
     # @param self Self.
     def read(self):
         try:
-            data = self.m_socket.recv(1024).decode("utf-8") # read from socket
+            data = self.m_socket.recv(1024).decode() # read from socket
             # delete \r and \n line's ending
             data=data.replace("\r","")
             data=data.replace("\n","")
